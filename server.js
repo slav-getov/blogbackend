@@ -10,7 +10,7 @@ const db = pgp(`postgres://${USERNAME}:${PASSWORD}@localhost:5432/${DBNAME}`);
 
 app.get("/", async (req, res) => {
   res.send("Hello World!");
-  db.one("SELECT $1 AS value", 123)
+  db.one("SELECT current_database()")
     .then((data) => {
       console.log("DATA:", data.value);
     })
