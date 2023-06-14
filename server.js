@@ -6,17 +6,13 @@ const PORT = process.env.PORT || 3000;
 const USERNAME = process.env.USERNAME;
 const PASSWORD = process.env.PASSWORD;
 const DBNAME = process.env.DBNAME;
-const db = pgp(`postgres://${USERNAME}:${PASSWORD}@localhost:5432/${DBNAME}`);
+const db = pgp(`postgres://${USERNAME}:${PASSWORD}/${DBNAME}`);
 
+function getDbName() {
+  return db.$cn;
+}
 app.get("/", async (req, res) => {
-  db.one("SELECT current_database()")
-    .then((data) => {
-      console.log("DATA:", data.value);
-      res.send(data.value);
-    })
-    .catch((error) => {
-      console.log("ERROR:", error);
-    });
+  res.send(getDbName());
 });
 
 app.listen(PORT, () => {
