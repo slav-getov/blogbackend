@@ -1,5 +1,5 @@
 const express = require("express");
-const pgp = require("pg-promise");
+const pgp = require("pg-promise")();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
