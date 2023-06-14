@@ -9,10 +9,10 @@ const DBNAME = process.env.DBNAME;
 const db = pgp(`postgres://${USERNAME}:${PASSWORD}@localhost:5432/${DBNAME}`);
 
 app.get("/", async (req, res) => {
-  res.send("Hello World!");
   db.one("SELECT current_database()")
     .then((data) => {
       console.log("DATA:", data.value);
+      res.send(data.value);
     })
     .catch((error) => {
       console.log("ERROR:", error);
